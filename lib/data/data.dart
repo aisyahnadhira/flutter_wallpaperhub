@@ -1,5 +1,6 @@
 import 'package:wallpaperhub/model/categories_model.dart';
 
+String apiKey = "563492ad6f91700001000001f6cf4306202f48fe9fb0b9eda297c881";
 List<CategorieModel> getCategories() {
   List<CategorieModel> categories = [];
   CategorieModel categorieModel = new CategorieModel();
