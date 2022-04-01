@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<CategorieModel> categories = [];
   List<WallpaperModel> wallpapers = [];
+  TextEditingController searchController = TextEditingController();
 
   getTrendingWallpapers() async{
     var response = await http.get(Uri.parse("https://api.pexels.com/v1/curated?per_page=15&page=1"), 
@@ -66,6 +67,7 @@ class _HomeState extends State<Home> {
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: searchController,
                         decoration: InputDecoration(
                           hintText: "Search Wallpaper",  
                           border: InputBorder.none                      
@@ -74,12 +76,11 @@ class _HomeState extends State<Home> {
                     ),
                     GestureDetector(
                       onTap: (){
-                      Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Search(
-                                          // search: searchController.text,
-                                        )));
+                      Navigator.push(context,MaterialPageRoute(
+                        builder: (context) => Search(searchQuery: searchController.text,
+                        ),
+                        ),
+                      );
                       },
                       child: Container(
                         child: Icon(Icons.search)),
