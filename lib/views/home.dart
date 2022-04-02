@@ -3,6 +3,7 @@ import 'package:wallpaperhub/data/data.dart';
 import 'package:wallpaperhub/model/categories_model.dart';
 import 'package:wallpaperhub/model/wallpaper_model.dart';
 import 'package:wallpaperhub/views/categorie.dart';
+import 'package:wallpaperhub/views/image_view.dart';
 import 'package:wallpaperhub/views/search.dart';
 import 'package:wallpaperhub/widgets/widget.dart';
 import 'package:http/http.dart' as http;
