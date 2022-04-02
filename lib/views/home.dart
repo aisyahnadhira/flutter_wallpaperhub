@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wallpaperhub/data/data.dart';
 import 'package:wallpaperhub/model/categories_model.dart';
 import 'package:wallpaperhub/model/wallpaper_model.dart';
+import 'package:wallpaperhub/views/categorie.dart';
 import 'package:wallpaperhub/views/search.dart';
 import 'package:wallpaperhub/widgets/widget.dart';
 import 'package:http/http.dart' as http;
@@ -120,29 +121,39 @@ class CategoriesTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 4.0),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(imgUrl, height: 50, width: 100, fit: BoxFit.cover),
-           ),
-          Container(
-            decoration: BoxDecoration( 
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.black26,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => Categorie(
+            categorieName: title.toLowerCase(),
             ),
-            height: 50, width: 100,
-            alignment: Alignment.center,
-            child: Text(title, 
-              style: TextStyle(
-                color: Colors.white, 
-                fontWeight: FontWeight.w500, 
-                fontSize: 15),
-                ),
-          )
-        ],
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 4.0),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(imgUrl, height: 50, width: 100, fit: BoxFit.cover),
+             ),
+            Container(
+              decoration: BoxDecoration( 
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.black26,
+              ),
+              height: 50, width: 100,
+              alignment: Alignment.center,
+              child: Text(title, 
+                style: TextStyle(
+                  color: Colors.white, 
+                  fontWeight: FontWeight.w500, 
+                  fontSize: 15),
+                  ),
+            )
+          ],
+        ),
       ),
     );
   }

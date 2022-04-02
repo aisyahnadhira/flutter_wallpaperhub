@@ -41,6 +41,7 @@ class _SearchState extends State<Search> {
   void initState() {
     getSearchWallpapers(widget.searchQuery);
     super.initState();
+    searchController.text = widget.searchQuery;
   }
 
   Widget build(BuildContext context) {
@@ -49,43 +50,45 @@ class _SearchState extends State<Search> {
         title: brandName(),
         elevation: 0.0,
       ),
-      body: Container(
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xfff5f8fd),
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 24.0),
-                margin: EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: searchController,
-                        decoration: InputDecoration(
-                          hintText: "Search Wallpaper",  
-                          border: InputBorder.none                      
+      body: SingleChildScrollView(
+        child: Container(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xfff5f8fd),
+                    borderRadius: BorderRadius.circular(30)
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 24.0),
+                  margin: EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: searchController,
+                          decoration: InputDecoration(
+                            hintText: "Search Wallpaper",  
+                            border: InputBorder.none                      
+                          ),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                      Navigator.push(context,MaterialPageRoute(
-                        builder: (context) => Search(searchQuery: searchController.text,
-                        ),
-                        ),
-                      );
-                      },
-                      child: Container(
-                        child: Icon(Icons.search)),
-                    )
-                  ],
+                      GestureDetector(
+                        onTap: (){
+                          getSearchWallpapers(searchController.text);
+                        },
+                        child: Container(
+                          child: Icon(Icons.search)),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          )
+                SizedBox(
+                  height: 16,
+                ),
+                WallpapersList(wallpapers: wallpapers, context: context),
+              ],
+            )
+        ),
       )
     );
   }
